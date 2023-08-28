@@ -47,17 +47,17 @@ export const GeneralInfoQuizForm = () => {
           <legend>Difficulty:</legend>
 
           <div>
-            <input type='radio' id='easy' name='difficulty' value='easy' />
+            <input type='radio' id='easy' name='difficulty' value='easy' required />
             <label htmlFor='easy'>easy</label>
           </div>
 
           <div>
-            <input type='radio' id='medium' name='difficulty' value='medium' />
+            <input type='radio' id='medium' name='difficulty' value='medium' required />
             <label htmlFor='medium'>medium</label>
           </div>
 
           <div>
-            <input type='radio' id='hard' name='difficulty' value='hard' />
+            <input type='radio' id='hard' name='difficulty' value='hard' required />
             <label htmlFor='hard'>hard</label>
           </div>
         </fieldset>

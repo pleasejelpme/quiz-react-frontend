@@ -8,10 +8,32 @@ export const Navigation = () => {
     logout()
   }
 
+  function renderLoggedUser () {
+    return (
+      <>
+        <div>
+          <Link to='/'><h1>QUIZ APP</h1></Link>
+        </div>
+        <button onClick={logoutUser}>logout</button>
+        <Link to='/add-quiz'><button>Create quiz</button></Link>
+      </>
+    )
+  }
+
+  function renderAnonUser () {
+    return (
+      <>
+        <Link to='/login'><button>Login</button></Link>
+      </>
+    )
+  }
+
   return (
     <nav>
       {username && <h1>hello {username}</h1>}
-      {username ? <button onClick={logoutUser}>logout</button> : <Link><button>login</button></Link>}
+      {username
+        ? renderLoggedUser()
+        : renderAnonUser()}
     </nav>
   )
 }

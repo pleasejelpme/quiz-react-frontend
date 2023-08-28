@@ -1,12 +1,15 @@
 import { Route, Routes } from 'react-router-dom'
+import { useEffect } from 'react'
+
 import { LoginPage } from './pages/LoginPage'
 import { RegisterPage } from './pages/RegisterPage'
 import { QuizFormPage } from './pages/QuizFormPage'
-import { Navigation } from './components/Navigation'
 import { HomePage } from './pages/HomePage'
+
+import { Navigation } from './components/Navigation'
 import { useAuthStore } from './store/auth'
-import { useEffect } from 'react'
 import { refreshAuthTokens } from './api/authRequests'
+import { PrivateRoutes, LoginRegisterRoutes } from './utils/PrivateRoute'
 
 function App () {
   const refreshToken = useAuthStore(state => state.refreshToken)
@@ -32,10 +35,18 @@ function App () {
     <>
       <Navigation />
       <Routes>
-        <Route path='/login' element={<LoginPage />} />
-        <Route path='/register' element={<RegisterPage />} />
-        <Route path='/add-quiz' element={<QuizFormPage />} />
-        <Route path='/' element={<HomePage />} />
+        {/* PROTECT LOGIN/REGISTER FROM USERS THAT ARE ALREADY LOGGED IN */}
+        <Route element={<LoginRegisterRoutes />}>
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='/register' element={<RegisterPage />} />
+        </Route>
+
+        {/* PROTECTED ROUTES */}
+        <Route element={<PrivateRoutes />}>
+          <Route path='/add-quiz' element={<QuizFormPage />} />
+          <Route path='/' element={<HomePage />} />
+        </Route>
+
       </Routes>
     </>
   )
