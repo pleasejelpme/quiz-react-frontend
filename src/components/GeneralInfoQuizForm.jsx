@@ -1,4 +1,5 @@
 import { useQuizStore } from '../store/quizes'
+import Button from '@mui/material/Button'
 
 export const GeneralInfoQuizForm = () => {
   const setQuizInfo = useQuizStore(state => state.setQuizInfo)
@@ -62,7 +63,7 @@ export const GeneralInfoQuizForm = () => {
           </div>
         </fieldset>
 
-        <button>Go to questions</button>
+        <Button variant='contained'>Go to questions</Button>
       </form>
     </>
   )

@@ -22,3 +22,31 @@ export const useQuizStore = create((set) => ({
     questionsCount: 0
   }))
 }))
+
+export const useQuizCompletionStore = create((set) => ({
+  quizId: 0,
+  quizInfo: [],
+  questions: [],
+  questionStage: 0,
+  questionChoices: [],
+  correctAnswers: [],
+  userAnswers: [],
+  userScore: 0,
+
+  setQuizId: (id) => set(() => ({ quizId: id })),
+  setQuizInfo: (quizInfo) => set(() => ({ quizInfo })),
+  setQuestions: (questions) => set(() => ({ questions })),
+  setQuestionChoices: (choices) => set((state) => ({ questionChoices: [...state.questionChoices, choices] })),
+  setCorrectAnswers: (answer) => set((state) => ({ correctAnswers: [...state.correctAnswers, answer] })),
+  setUserAnswers: (answer) => set((state) => ({ userAnswers: [...state.userAnswers, answer] })),
+  setUserScore: (score) => set((state) => ({ userScore: score })),
+  incrementQuestionStage: () => set((state) => ({ questionStage: ++state.questionStage })),
+
+  clearStates: () => set(() => ({
+    questions: [],
+    questionStage: 0,
+    questionChoices: [],
+    userAnswers: [],
+    correctAnswers: []
+  }))
+}))

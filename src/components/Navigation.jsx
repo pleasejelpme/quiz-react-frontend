@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useAuthStore } from '../store/auth'
+import { AppBar, Typography } from '@mui/material'
 
 export const Navigation = () => {
   const username = useAuthStore(state => state.loggedUser)
@@ -11,9 +12,11 @@ export const Navigation = () => {
   function renderLoggedUser () {
     return (
       <>
-        <div>
-          <Link to='/'><h1>QUIZ APP</h1></Link>
-        </div>
+        <Typography variant='h3'>
+          <Link to='/'>QUIZ APP</Link>
+          <p>hello {username}</p>
+        </Typography>
+
         <button onClick={logoutUser}>logout</button>
         <Link to='/add-quiz'><button>Create quiz</button></Link>
       </>
@@ -29,11 +32,12 @@ export const Navigation = () => {
   }
 
   return (
-    <nav>
-      {username && <h1>hello {username}</h1>}
-      {username
-        ? renderLoggedUser()
-        : renderAnonUser()}
-    </nav>
+    <div>
+      <AppBar position='sticky'>
+        {username
+          ? renderLoggedUser()
+          : renderAnonUser()}
+      </AppBar>
+    </div>
   )
 }

@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { LoginPage } from './pages/LoginPage'
 import { RegisterPage } from './pages/RegisterPage'
 import { QuizFormPage } from './pages/QuizFormPage'
+import { QuizDetailPage } from './pages/QuizDetailPage'
 import { HomePage } from './pages/HomePage'
 
 import { Navigation } from './components/Navigation'
@@ -43,6 +44,7 @@ function App () {
 
         {/* PROTECTED ROUTES */}
         <Route element={<PrivateRoutes />}>
+          <Route path='/quizes/:quizId' element={<QuizDetailPage />} />
           <Route path='/add-quiz' element={<QuizFormPage />} />
           <Route path='/' element={<HomePage />} />
         </Route>

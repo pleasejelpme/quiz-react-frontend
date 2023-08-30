@@ -1,8 +1,15 @@
+/* eslint-disable object-shorthand */
 /* eslint-disable quote-props */
 import { ENDPOINT } from './endpoint'
 
 export const getQuizes = async () => {
   const response = await fetch(`${ENDPOINT}/quizes/`)
+  const data = await response.json()
+  return data
+}
+
+export const getSpecificQuiz = async (id) => {
+  const response = await fetch(`${ENDPOINT}/quizes/${id}`)
   const data = await response.json()
   return data
 }
@@ -58,4 +65,21 @@ export const addAnswerToQuiz = async (token, questionId, choice, isCorrect) => {
       'correct': isCorrect
     })
   })
+}
+
+export const addCompletedQuiz = async (token, quizId, score) => {
+  const response = await fetch(`${ENDPOINT}/completed-quizes/`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + String(token)
+    },
+    body: JSON.stringify({
+      'quiz': quizId,
+      'score': score
+    })
+  })
+
+  const data = await response.json()
+  return data
 }
