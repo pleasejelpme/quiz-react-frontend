@@ -25,7 +25,7 @@ export const useQuizStore = create((set) => ({
 
 export const useQuizCompletionStore = create((set) => ({
   quizId: 0,
-  quizInfo: [],
+  quizInfo: null,
   questions: [],
   questionStage: 0,
   questionChoices: [],

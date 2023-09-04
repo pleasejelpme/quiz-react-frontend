@@ -6,6 +6,7 @@ import { RegisterPage } from './pages/RegisterPage'
 import { QuizFormPage } from './pages/QuizFormPage'
 import { QuizDetailPage } from './pages/QuizDetailPage'
 import { HomePage } from './pages/HomePage'
+import { QuizCompletionsPage } from './pages/QuizCompletionsPage'
 
 import { Navigation } from './components/Navigation'
 import { useAuthStore } from './store/auth'
@@ -17,13 +18,12 @@ function App () {
   const setRefreshToken = useAuthStore(state => state.setRefreshToken)
   const setAccessToken = useAuthStore(state => state.setAccessToken)
 
-  // refresh jwt every minute
+  // refresh jwt every 5 minutes
   useEffect(() => {
     const timeInterval = 1000 * 60 * 5
     const interval = setInterval(async () => {
       if (refreshToken) {
         const newTokens = await refreshAuthTokens(refreshToken)
-        console.log(newTokens)
         setAccessToken(newTokens.access)
         setRefreshToken(newTokens.refresh)
       }
@@ -47,6 +47,7 @@ function App () {
           <Route path='/quizes/:quizId' element={<QuizDetailPage />} />
           <Route path='/add-quiz' element={<QuizFormPage />} />
           <Route path='/' element={<HomePage />} />
+          <Route path='/completions' element={<QuizCompletionsPage />} />
         </Route>
 
       </Routes>

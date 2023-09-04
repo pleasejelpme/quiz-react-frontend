@@ -83,3 +83,16 @@ export const addCompletedQuiz = async (token, quizId, score) => {
   const data = await response.json()
   return data
 }
+
+export const getCompletedQuizes = async (token) => {
+  const response = await fetch(`${ENDPOINT}/completed-quizes/`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + String(token)
+    }
+  })
+  const data = await response.json()
+  console.log(data)
+  return data
+}

@@ -1,5 +1,4 @@
 import { useQuizStore } from '../store/quizes'
-import Button from '@mui/material/Button'
 
 export const GeneralInfoQuizForm = () => {
   const setQuizInfo = useQuizStore(state => state.setQuizInfo)
@@ -14,9 +13,8 @@ export const GeneralInfoQuizForm = () => {
     const requiredScore = e.target.requiredScore.value
     const difficulty = e.target.difficulty.value
 
-    const newQuizInfo = { title, topic, timeToComplete, requiredScore, difficulty }
-    setQuizInfo(newQuizInfo)
-    setQuizInfoSubmited()
+    setQuizInfo({ title, topic, timeToComplete, requiredScore, difficulty })
+    setQuizInfoSubmited(true)
   }
 
   return (
@@ -63,7 +61,7 @@ export const GeneralInfoQuizForm = () => {
           </div>
         </fieldset>
 
-        <Button variant='contained'>Go to questions</Button>
+        <button>Go to questions</button>
       </form>
     </>
   )

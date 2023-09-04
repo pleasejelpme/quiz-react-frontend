@@ -19,6 +19,7 @@ export const Navigation = () => {
 
         <button onClick={logoutUser}>logout</button>
         <Link to='/add-quiz'><button>Create quiz</button></Link>
+        <Link to='/completions'><button>Completions</button></Link>
       </>
     )
   }

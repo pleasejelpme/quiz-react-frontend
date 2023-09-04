@@ -34,7 +34,6 @@ export const loginUser = async (username, password) => {
 }
 
 export const refreshAuthTokens = async (refresh) => {
-  console.log('upd token')
   const response = await fetch(`${ENDPOINT}/token/refresh/`, {
     method: 'POST',
     headers: {
