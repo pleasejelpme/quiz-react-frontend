@@ -15,12 +15,17 @@ export const QuizCompletionsPage = () => {
     fetchCompletedQuizes()
   }, [])
 
+  const renderCompletedQuizes = (completedQuizes) => {
+    return (
+      completedQuizes.map((completion) => (
+        <button key={completion.quiz_id}>{completion.quiz_title} | {completion.best_score}</button>
+      )))
+  }
+
   return (
     <>
       <h2>Completed Quizes</h2>
-      {completedQuizes.map((completion) => (
-        <button key={completion.id}>{completion.id} | {completion.score}</button>
-      ))}
+      {renderCompletedQuizes(completedQuizes)}
     </>
   )
 }
