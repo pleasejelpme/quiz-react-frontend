@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+
 import { getSpecificQuiz } from '../api/quizRequests'
 import { useAuthStore } from '../store/auth'
 import { useQuizCompletionStore } from '../store/quizes'
@@ -7,7 +8,6 @@ import { QuizQuestion } from '../components/QuizQuestion'
 
 export const QuizDetailPage = () => {
   const [quiz, setQuiz] = useState([]) // state for the quiz fetched from the API
-
   const setQuizId = useQuizCompletionStore(state => state.setQuizId)
   const setQuizInfo = useQuizCompletionStore(state => state.setQuizInfo)
   const setQuestions = useQuizCompletionStore(state => state.setQuestions)
@@ -16,7 +16,6 @@ export const QuizDetailPage = () => {
 
   const questionStage = useQuizCompletionStore(state => state.questionStage)
   const incrementStage = useQuizCompletionStore(state => state.incrementQuestionStage)
-  // const decrementStage = useQuizCompletionStore(state => state.decrementQuestionStage)
 
   const { quizId } = useParams()
 
@@ -50,20 +49,26 @@ export const QuizDetailPage = () => {
   }
 
   return (
-    <>
+    <div className='container d-flex justify-content-center'>
       {questionStage === 0 &&
-        <>
-          <h2>{quiz.title}</h2>
-          <small>{quiz.topic}</small>
-          <p>Created by: <strong>{quiz.creator === loggedUser ? 'You' : quiz.creator}</strong></p>
-          <p>Difficulty: <strong>{quiz.difficulty}</strong></p>
-          <p>Time to complete: <strong>{quiz.time_to_complete} minutes</strong></p>
-          <p>Required score: <strong>{quiz.required_score}%</strong></p>
-          <p>Times completed successfully: <strong>{quiz.times_completed}</strong></p>
-          {loggedUser !== quiz.creator && <button onClick={startQuiz}>START QUIZ</button>}
-        </>}
+        <div className='card border' style={{ maxWidth: '500px', minWidth: '500px' }} data-bs-theme='dark'>
+          <div className='card-header text-white'>
+            <h2>{quiz.title}</h2>
+          </div>
 
-      {questionStage !== 0 && <QuizQuestion />}
-    </>
+          <div className='card-body text-white'>
+            <p className='card-text'>Topic: <strong className='text-primary'>{quiz.topic}</strong></p>
+            <p className='card-text'>Created by: <strong className='text-primary'>{quiz.creator === loggedUser ? 'You' : quiz.creator}</strong></p>
+            <p className='card-text'>Difficulty: <strong className='text-primary'>{quiz.difficulty}</strong></p>
+            <p className='card-text'>Time to complete: <strong className='text-primary'>{quiz.time_to_complete} minutes</strong></p>
+            <p className='card-text'>Required score: <strong className='text-primary'>{quiz.required_score}%</strong></p>
+            <p className='card-text'>Overall completions: <strong className='text-primary'>{quiz.times_completed}</strong></p>
+            {loggedUser !== quiz.creator && <button className='btn btn-outline-primary' onClick={startQuiz}>START QUIZ</button>}
+          </div>
+        </div>}
+
+      {questionStage !== 0 &&
+        <QuizQuestion />}
+    </div>
   )
 }

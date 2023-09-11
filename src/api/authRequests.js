@@ -13,8 +13,7 @@ export const registerUser = async (username, password, password2) => {
     })
   })
   const data = await response.json()
-
-  return response.status === 201 ? data : response
+  return [response.status, data]
 }
 
 export const loginUser = async (username, password) => {

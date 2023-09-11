@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { toast } from 'react-hot-toast'
+
 import { useQuizStore } from '../store/quizes'
 
 export const QuestionForm = () => {
@@ -9,6 +11,10 @@ export const QuestionForm = () => {
   const questionsCount = useQuizStore(state => state.questionsCount)
   const incrementQuestionsCount = useQuizStore(state => state.incrementQuestionsCount)
 
+  const checkChoicesAreDifferent = (choices) => {
+    return new Set(choices).size < choices.length
+  }
+
   const handleQuestionSubmit = (e) => {
     e.preventDefault()
     const questionTitle = e.target.question.value
@@ -17,6 +23,16 @@ export const QuestionForm = () => {
     const answer3 = e.target.answer3.value
     const answer4 = e.target.answer4.value
     const correctOption = e.target.correctAnswer.value
+
+    if (checkChoicesAreDifferent([answer1, answer2, answer3, answer4]) === true) {
+      toast.error('There are some choices that are the same!')
+      return
+    }
+
+    if (questionsTitles.some(title => title === questionTitle)) {
+      toast.error('You already added this question! Try a new one')
+      return
+    }
 
     const answersList = [
       { text: answer1, correct: false },
@@ -27,54 +43,69 @@ export const QuestionForm = () => {
 
     answersList[correctOption].correct = true
 
-    if (questionsTitles.some(title => title === questionTitle)) {
-      console.log('TITLE IN USE')
-    } else {
-      setQuestionsTitles([...questionsTitles, questionTitle])
+    setQuestionsTitles([...questionsTitles, questionTitle])
 
-      const newQuestion = { question: questionTitle, choices: answersList }
-      setQuestions([...questionsToFetch, newQuestion])
-      incrementQuestionsCount()
-      e.target.reset()
-      console.log(questionsCount)
-    }
+    const newQuestion = { question: questionTitle, choices: answersList }
+    setQuestions([...questionsToFetch, newQuestion])
+    incrementQuestionsCount()
+    e.target.reset()
+    toast.success('Question added!', { icon: '📚' })
   }
 
   return (
     <>
-      <h1>Questions</h1>
-      <p>You must add a minimum of 3 questions</p>
+      <div className='card-header mb-3'>
+        <h1 className='card-title'>Questions</h1>
+        <p>You must add a minimum of 3 questions</p>
+      </div>
+
       <form onSubmit={handleQuestionSubmit}>
-        <div>
-          <label htmlFor='question'>Question {questionsCount + 1}: </label>
-          <input type='text' id='question' name='question' required />
+        <div className='mb-3'>
+          <label className='form-label' htmlFor='question'><h4>Question {questionsCount + 1}:</h4></label>
+          <input className='form-control' type='text' id='question' name='question' required />
         </div>
 
         <fieldset>
-          <legend>Answers</legend>
+          <legend>Choices</legend>
 
-          <div>
-            <input type='text' name='answer1' required />
-            <input type='radio' name='correctAnswer' value={0} required />
+          <div className='row mb-3 d-flex align-items-center'>
+            <div className='col-sm-10'>
+              <input className='form-control' type='text' name='answer1' required />
+            </div>
+            <div className='col-sm-2'>
+              <input className='form-check' type='radio' name='correctAnswer' value={0} required />
+            </div>
           </div>
 
-          <div>
-            <input type='text' name='answer2' required />
-            <input type='radio' name='correctAnswer' value={1} required />
+          <div className='row mb-3 d-flex align-items-center'>
+            <div className='col-sm-10'>
+              <input className='form-control' type='text' name='answer2' required />
+            </div>
+            <div className='col-sm-2'>
+              <input className='form-check' type='radio' name='correctAnswer' value={1} required />
+            </div>
           </div>
 
-          <div>
-            <input type='text' name='answer3' required />
-            <input type='radio' name='correctAnswer' value={2} required />
+          <div className='row mb-3 d-flex align-items-center'>
+            <div className='col-sm-10'>
+              <input className='form-control' type='text' name='answer3' required />
+            </div>
+            <div className='col-sm-2'>
+              <input className='form-check' type='radio' name='correctAnswer' value={2} required />
+            </div>
           </div>
 
-          <div>
-            <input type='text' name='answer4' required />
-            <input type='radio' name='correctAnswer' value={3} required />
+          <div className='row mb-3 d-flex align-items-center'>
+            <div className='col-sm-10'>
+              <input className='form-control' type='text' name='answer4' required />
+            </div>
+            <div className='col-sm-2'>
+              <input className='form-check' type='radio' name='correctAnswer' value={3} required />
+            </div>
           </div>
         </fieldset>
 
-        <button>Add question</button>
+        <button className='btn btn-outline-primary'>Add question</button>
       </form>
     </>
   )

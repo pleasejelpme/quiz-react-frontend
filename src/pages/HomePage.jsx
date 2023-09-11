@@ -17,14 +17,24 @@ export const HomePage = () => {
   }, [])
 
   return (
-    <>
-      {
-        quizes.map((quiz) => (
-          <div className='quiz' key={quiz.id}>
-            <Link to={`/quizes/${quiz.id}`}>{quiz.title}</Link>
-          </div>
-        ))
-      }
-    </>
+    <div className='container'>
+      <div className='row d-flex align-items-center'>
+        {
+          quizes.map((quiz) => (
+            <div className='col-xxl-4 col-lg-6 col-sm-12' key={quiz.id}>
+              <Link to={`quizes/${quiz.id}`}>
+                <div
+                  className='card card-hover border mb-5 d-flex justify-content-center aling-items-center'
+                  data-bs-theme='dark'
+                  style={{ width: '400px', height: '250px', cursor: 'pointer' }}
+                >
+                  <h2 className='text-primary'>{quiz.title}</h2>
+                </div>
+              </Link>
+            </div>
+          ))
+        }
+      </div>
+    </div>
   )
 }

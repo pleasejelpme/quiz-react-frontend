@@ -1,33 +1,97 @@
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { toast } from 'react-hot-toast'
+
 import { registerUser } from '../api/authRequests'
+import { useAuthStore } from '../store/auth'
 
 export const RegisterPage = () => {
-  const handleSubmit = (e) => {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [password2, setPassword2] = useState('')
+
+  const setLoggedUser = useAuthStore(state => state.setLoggedUser)
+  const setAccessToken = useAuthStore(state => state.setAccessToken)
+  const setRefreshToken = useAuthStore(state => state.setRefreshToken)
+
+  const handleRegister = (e) => {
     e.preventDefault()
-    const username = e.target.username.value
-    const password = e.target.password.value
-    const password2 = e.target.password2.value
 
     async function register () {
-      const response = await registerUser(username, password, password2)
-      console.log(response)
+      const [statusCode, response] = await registerUser(username, password, password2)
+
+      if (statusCode === 201) {
+        setLoggedUser(response.username)
+        setAccessToken(response.tokens.access)
+        setRefreshToken(response.tokens.refresh)
+        toast.success(`Welcome ${response.username}!`, { icon: '👋' })
+      } else {
+        console.log(response)
+        response.username && toast.error(response.username)
+        response.password && response.password.map(error => toast.error(error))
+      }
     }
+
     register()
   }
 
   return (
-    <section>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor='username'>Username: </label>
-        <input type='text' id='username' name='username' />
+    <div className='container d-flex justify-content-center'>
+      {/* {error && handleErrors} */}
+      <div className='card' data-bs-theme='dark' style={{ width: '500px' }}>
+        <div className='card-header'>
+          <h2 className='card-title'>Register</h2>
+        </div>
+        <div className='card-body'>
+          <form onSubmit={handleRegister}>
+            <div className='mb-3'>
+              <label className='form-label' htmlFor='username'>Username: </label>
+              <input
+                className='form-control'
+                type='text'
+                id='username'
+                name='username'
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+            </div>
 
-        <label htmlFor='password'>Password: </label>
-        <input type='password' id='password' name='password' />
+            <div className='mb-3'>
+              <label className='form-label' htmlFor='password'>Password: </label>
+              <input
+                className='form-control'
+                type='password'
+                id='password'
+                name='password'
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
 
-        <label htmlFor='password2'>Confirm password: </label>
-        <input type='password' id='password2' name='password2' />
+            <div className='mb-3'>
+              <label className='form-label' htmlFor='password2'>Confirm password: </label>
+              <input
+                className='form-control'
+                type='password'
+                id='password2'
+                name='password2'
+                value={password2}
+                onChange={(e) => setPassword2(e.target.value)}
+                required
+              />
+            </div>
 
-        <button>Register</button>
-      </form>
-    </section>
+            <button className='btn btn-outline-primary'>Register</button>
+          </form>
+        </div>
+
+        <div className='card-footer'>
+          <span>Already have an account? <Link to='/login' className='text-primary'>login</Link></span>
+        </div>
+
+      </div>
+    </div>
   )
 }

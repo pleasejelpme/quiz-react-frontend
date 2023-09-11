@@ -1,8 +1,11 @@
 /* eslint-disable no-undef */
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { toast } from 'react-hot-toast'
+import jwtDecode from 'jwt-decode'
+
 import { useAuthStore } from '../store/auth'
 import { loginUser } from '../api/authRequests'
-import jwtDecode from 'jwt-decode'
 
 export const LoginPage = () => {
   const setLoggedUser = useAuthStore(state => state.setLoggedUser)
@@ -20,46 +23,64 @@ export const LoginPage = () => {
         const userTokens = await loginUser(username, password)
         setAccessToken(userTokens.access)
         setRefreshToken(userTokens.refresh)
-
-        const loggedUser = jwtDecode(userTokens.access).username
-        setLoggedUser(loggedUser)
+        setLoggedUser(jwtDecode(userTokens.access).username)
 
         setUsername('')
         setPassword('')
-      } catch (err) {
-        console.error(err)
+        toast.success(`Welcome ${username}!`, {
+          icon: '👋'
+        })
+      } catch {
+        toast.error('Username or password incorrect')
       }
     }
 
     login()
   }
   return (
-    <section className='form' onSubmit={handleLogin}>
-      <form>
-        <div>
-          <label htmlFor='username'>Username: </label>
-          <input
-            type='text'
-            id='username'
-            name='Username'
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
+    <div className='container d-flex justify-content-center'>
+      <div className='card' data-bs-theme='dark' style={{ width: '500px' }}>
+        <div className='card-header'>
+          <h2 className='card-title'>login</h2>
         </div>
 
-        <div>
-          <label htmlFor='password'>Password: </label>
-          <input
-            type='password'
-            id='password'
-            name='Password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+        <div className='card-body'>
+          <form onSubmit={handleLogin}>
+            <div>
+              <label className='form-label' htmlFor='username'>Username: </label>
+              <input
+                className='form-control'
+                type='text'
+                id='username'
+                name='Username'
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+            </div>
+
+            <div>
+              <label className='form-label' htmlFor='password'>Password: </label>
+              <input
+                className='form-control mb-3'
+                type='password'
+                id='password'
+                name='Password'
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+
+            <button className='btn btn-outline-primary'>Login</button>
+          </form>
         </div>
 
-        <button>Login</button>
-      </form>
-    </section>
+        <div className='card-footer'>
+          <span>Dont have an account? <Link to='/register' className='text-primary'>register</Link></span>
+        </div>
+      </div>
+    </div>
+
   )
 }

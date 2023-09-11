@@ -1,3 +1,6 @@
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-hot-toast'
+
 import { useQuizStore } from '../store/quizes'
 import { useAuthStore } from '../store/auth'
 import { GeneralInfoQuizForm } from '../components/GeneralInfoQuizForm'
@@ -12,6 +15,8 @@ export const QuizFormPage = () => {
   const resetQuiz = useQuizStore(state => state.resetQuiz)
 
   const token = useAuthStore(state => state.accessToken)
+
+  const navigate = useNavigate()
 
   const handleQuizCreation = async () => {
     // fetch all the data to the API
@@ -33,6 +38,8 @@ export const QuizFormPage = () => {
       }
       // restart all the quiz states
       resetQuiz()
+      toast.success('Quiz created successfully!')
+      navigate('/')
     } catch {
       console.log('something went wrong')
     } finally {
@@ -42,9 +49,14 @@ export const QuizFormPage = () => {
   }
 
   return (
-    <>
-      {quizInfoSubmited === false ? <GeneralInfoQuizForm /> : <QuestionForm />}
-      {questionsCount >= 3 && <button onClick={handleQuizCreation}>Create quiz!</button>}
-    </>
+    <div className='container' style={{ maxWidth: '600px' }}>
+      <div className='card border p-4' data-bs-theme='dark'>
+        {quizInfoSubmited === false ? <GeneralInfoQuizForm /> : <QuestionForm />}
+        {questionsCount >= 3 &&
+          <div className='card-footer bg-dark mt-3 pt-4'>
+            <button className='btn btn-outline-success' onClick={handleQuizCreation}>Create quiz!</button>
+          </div>}
+      </div>
+    </div>
   )
 }

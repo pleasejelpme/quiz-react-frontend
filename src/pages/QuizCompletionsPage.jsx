@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { useAuthStore } from '../store/auth'
 import { getCompletedQuizes } from '../api/quizRequests'
@@ -17,15 +18,37 @@ export const QuizCompletionsPage = () => {
 
   const renderCompletedQuizes = (completedQuizes) => {
     return (
-      completedQuizes.map((completion) => (
-        <button key={completion.quiz_id}>{completion.quiz_title} | {completion.best_score}</button>
-      )))
+      <>
+        <thead>
+          <tr>
+            <th>Quiz</th>
+            <th>Best score</th>
+          </tr>
+        </thead>
+
+        <tbody className='table-group-divider'>
+          {completedQuizes.map((completion) => (
+            <tr key={completion.quiz_id}>
+              <td><Link to={`../quizes/${completion.quiz_id}`}>{completion.quiz_title}</Link></td>
+              <td>{completion.best_score}</td>
+            </tr>
+          ))}
+        </tbody>
+      </>
+    )
   }
 
   return (
-    <>
-      <h2>Completed Quizes</h2>
-      {renderCompletedQuizes(completedQuizes)}
-    </>
+    <div className='container'>
+      <div className='row d-flex justify-content-center'>
+        <div className='col-md-6 col-sm-12'>
+          <h2>Completed Quizes</h2>
+          <table className='table table-dark mt-5'>
+            {renderCompletedQuizes(completedQuizes)}
+          </table>
+        </div>
+
+      </div>
+    </div>
   )
 }

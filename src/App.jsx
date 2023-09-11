@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import { useEffect } from 'react'
+import { Toaster } from 'react-hot-toast'
 
 import { LoginPage } from './pages/LoginPage'
 import { RegisterPage } from './pages/RegisterPage'
@@ -34,6 +35,26 @@ function App () {
 
   return (
     <>
+      {/* REACT HOT TOAST NOTIFICATIONS */}
+      <Toaster
+        toastOptions={{
+          style: {
+            background: '#343a40',
+            color: '#fff'
+          },
+          error: {
+            style: {
+              border: '1px solid #dc3545'
+            }
+          },
+          success: {
+            style: {
+              border: '1px solid #198754'
+            }
+          }
+        }}
+      />
+
       <Navigation />
       <Routes>
         {/* PROTECT LOGIN/REGISTER FROM USERS THAT ARE ALREADY LOGGED IN */}

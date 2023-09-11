@@ -15,7 +15,6 @@ export const getSpecificQuiz = async (id) => {
 }
 
 export const createQuiz = async (token, quizInfo) => {
-  console.log(quizInfo)
   const response = await fetch(`${ENDPOINT}/quizes/`, {
     method: 'POST',
     headers: {
@@ -36,7 +35,6 @@ export const createQuiz = async (token, quizInfo) => {
 }
 
 export const addQuestionToQuiz = async (token, quizId, question) => {
-  console.log(question)
   const response = await fetch(`${ENDPOINT}/questions/`, {
     method: 'POST',
     headers: {
@@ -93,6 +91,5 @@ export const getCompletedQuizes = async (token) => {
     }
   })
   const data = await response.json()
-  console.log(data)
   return data
 }

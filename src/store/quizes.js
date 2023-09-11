@@ -41,7 +41,9 @@ export const useQuizCompletionStore = create((set) => ({
   setUserAnswers: (answer) => set((state) => ({ userAnswers: [...state.userAnswers, answer] })),
   setUserScore: (score) => set((state) => ({ userScore: score })),
   incrementQuestionStage: () => set((state) => ({ questionStage: ++state.questionStage })),
+  setQuestionStage: (stage) => set((state) => ({ questionStage: stage })),
 
+  clearUserAnswers: () => set(() => ({ userAnswers: [] })),
   clearStates: () => set(() => ({
     questions: [],
     questionStage: 0,
