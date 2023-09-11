@@ -73,7 +73,7 @@ export const QuizQuestion = () => {
   return (
     <div className='container d-flex justify-content-center'>
       {completed === null &&
-        <>
+        <div>
           <Countdown seconds={quizInfo.timeToComplete * 60} />
           <div className='card border' style={{ maxWidth: '500px', minWidth: '500px' }} data-bs-theme='dark'>
             <div className='card-header'>
@@ -93,7 +93,7 @@ export const QuizQuestion = () => {
             </ul>
 
           </div>
-        </>}
+        </div>}
 
       {completed === true &&
         <div className='card border' style={{ maxWidth: '500px', minWidth: '500px' }} data-bs-theme='dark'>

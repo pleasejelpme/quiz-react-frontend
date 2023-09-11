@@ -50,6 +50,11 @@ export const useQuizCompletionStore = create((set) => ({
     questionChoices: [],
     userAnswers: [],
     correctAnswers: []
+  })),
+
+  resetQuiz: () => set(() => ({
+    questionStage: 0,
+    userAnswers: []
   }))
 }))
 
