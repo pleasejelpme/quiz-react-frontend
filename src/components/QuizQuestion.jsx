@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
+import confetti from 'canvas-confetti'
 
 import { useQuizCompletionStore } from '../store/quizes'
 import { useAuthStore } from '../store/auth'
@@ -60,9 +61,12 @@ export const QuizQuestion = () => {
 
   useEffect(() => {
     if (completed) {
-      userScore >= quizInfo.requiredScore
-        ? toast.success('Quiz aproved!', { icon: '🎉🎊', duration: 2000 })
-        : toast.error('Not aproved, luck next time!', { icon: '😭', duration: 2000 })
+      if (userScore >= quizInfo.requiredScore) {
+        toast.success('Quiz aproved!', { icon: '🎉🎊', duration: 2000 })
+        confetti()
+      } else {
+        toast.error('Not aproved, luck next time!', { icon: '😭', duration: 2000 })
+      }
     }
   }, [userScore])
 

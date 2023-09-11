@@ -52,3 +52,9 @@ export const useQuizCompletionStore = create((set) => ({
     correctAnswers: []
   }))
 }))
+
+export const useQuizSearch = create((set) => ({
+  queryset: '',
+
+  setQueryset: (qs) => set(() => ({ queryset: qs }))
+}))

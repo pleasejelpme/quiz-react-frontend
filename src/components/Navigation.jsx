@@ -1,11 +1,19 @@
 import { Link } from 'react-router-dom'
+
 import { useAuthStore } from '../store/auth'
+import { useQuizSearch } from '../store/quizes'
 
 export const Navigation = () => {
   const username = useAuthStore(state => state.loggedUser)
   const logout = useAuthStore(state => state.cleanTokens)
+  const setQueryset = useQuizSearch(state => state.setQueryset)
+
   const logoutUser = () => {
     logout()
+  }
+
+  const handleSearch = (queryset) => {
+    setQueryset(queryset)
   }
 
   function renderLoggedUser () {
@@ -53,7 +61,12 @@ export const Navigation = () => {
               <ul className='navbar-nav'>
                 <li className='navbar-item'>
                   <form className='d-flex' role='search'>
-                    <input className='form-control me-2' type='search' placeholder='Search a quiz...' />
+                    <input
+                      className='form-control me-2'
+                      type='search'
+                      placeholder='Search a quiz...'
+                      onChange={e => handleSearch(e.target.value.toLowerCase())}
+                    />
                   </form>
                 </li>
                 <li className='navbar-item'>

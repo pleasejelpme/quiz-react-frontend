@@ -7,3 +7,13 @@ a {
     color: white;
     text-decoration: none;
 }
+
+.card {
+    transition: all 0.3s;
+}
+
+.quiz-cards:hover {
+    transform: scale(1.05);
+    background: #343a40;
+    filter: drop-shadow(0 0 0.2rem #0d6efd);
+}
