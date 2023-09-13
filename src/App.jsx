@@ -8,6 +8,7 @@ import { QuizFormPage } from './pages/QuizFormPage'
 import { QuizDetailPage } from './pages/QuizDetailPage'
 import { HomePage } from './pages/HomePage'
 import { QuizCompletionsPage } from './pages/QuizCompletionsPage'
+import { AccountPage } from './pages/AccountPage'
 
 import { Navigation } from './components/Navigation'
 import { useAuthStore } from './store/auth'
@@ -69,6 +70,7 @@ function App () {
           <Route path='/add-quiz' element={<QuizFormPage />} />
           <Route path='/' element={<HomePage />} />
           <Route path='/completions' element={<QuizCompletionsPage />} />
+          <Route path='/account' element={<AccountPage />} />
         </Route>
 
       </Routes>

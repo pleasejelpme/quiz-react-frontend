@@ -37,17 +37,19 @@ export const RegisterPage = () => {
 
   return (
     <div className='container d-flex justify-content-center'>
-      {/* {error && handleErrors} */}
       <div className='card' data-bs-theme='dark' style={{ width: '500px' }}>
         <div className='card-header'>
           <h2 className='card-title'>Register</h2>
         </div>
         <div className='card-body'>
           <form onSubmit={handleRegister}>
-            <div className='mb-3'>
-              <label className='form-label' htmlFor='username'>Username: </label>
+            <div className='input-group mb-3'>
+              <span className='input-group-text'>
+                <i className='bi-person-circle' />
+              </span>
               <input
                 className='form-control'
+                placeholder='Username'
                 type='text'
                 id='username'
                 name='username'
@@ -57,10 +59,13 @@ export const RegisterPage = () => {
               />
             </div>
 
-            <div className='mb-3'>
-              <label className='form-label' htmlFor='password'>Password: </label>
+            <div className='input-group mb-3'>
+              <span className='input-group-text'>
+                <i className='bi-key' />
+              </span>
               <input
                 className='form-control'
+                placeholder='Password'
                 type='password'
                 id='password'
                 name='password'
@@ -70,10 +75,13 @@ export const RegisterPage = () => {
               />
             </div>
 
-            <div className='mb-3'>
-              <label className='form-label' htmlFor='password2'>Confirm password: </label>
+            <div className='input-group mb-3'>
+              <span className='input-group-text'>
+                <i className='bi-key' />
+              </span>
               <input
                 className='form-control'
+                placeholder='Confirm password'
                 type='password'
                 id='password2'
                 name='password2'

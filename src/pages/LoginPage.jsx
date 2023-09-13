@@ -41,15 +41,19 @@ export const LoginPage = () => {
     <div className='container d-flex justify-content-center'>
       <div className='card' data-bs-theme='dark' style={{ width: '500px' }}>
         <div className='card-header'>
-          <h2 className='card-title'>login</h2>
+          <h2 className='card-title'>Login</h2>
         </div>
 
         <div className='card-body'>
           <form onSubmit={handleLogin}>
-            <div>
-              <label className='form-label' htmlFor='username'>Username: </label>
+
+            <div className='input-group mb-3'>
+              <span className='input-group-text'>
+                <i className='bi-person-circle' style={{ fontSize: '1.1rem' }} />
+              </span>
               <input
                 className='form-control'
+                placeholder='Username'
                 type='text'
                 id='username'
                 name='Username'
@@ -59,10 +63,13 @@ export const LoginPage = () => {
               />
             </div>
 
-            <div>
-              <label className='form-label' htmlFor='password'>Password: </label>
+            <div className='input-group mb-3'>
+              <span className='input-group-text'>
+                <i className='bi-key' style={{ fontSize: '1.1rem' }} />
+              </span>
               <input
-                className='form-control mb-3'
+                className='form-control'
+                placeholder='Password'
                 type='password'
                 id='password'
                 name='Password'

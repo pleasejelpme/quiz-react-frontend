@@ -36,7 +36,7 @@ export const HomePage = () => {
                 <div
                   className='card quiz-cards card-hover border d-flex justify-content-center aling-items-center'
                   data-bs-theme='dark'
-                  style={{ width: '400px', height: '250px', cursor: 'pointer' }}
+                  style={{ width: '20rem', height: '15rem', cursor: 'pointer' }}
                 >
                   <h2 className='text-primary'>{quiz.title}</h2>
                 </div>

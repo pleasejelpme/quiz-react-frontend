@@ -51,7 +51,7 @@ export const QuizDetailPage = () => {
   return (
     <div className='container d-flex justify-content-center'>
       {questionStage === 0 &&
-        <div className='card border' style={{ maxWidth: '500px', minWidth: '500px' }} data-bs-theme='dark'>
+        <div className='card border' style={{ width: '30rem', height: 'auto' }} data-bs-theme='dark'>
           <div className='card-header text-white'>
             <h2>{quiz.title}</h2>
           </div>

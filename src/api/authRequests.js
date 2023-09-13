@@ -46,3 +46,21 @@ export const refreshAuthTokens = async (refresh) => {
   const data = await response.json()
   return data
 }
+
+export const changePassword = async (token, oldPassword, newPassword, newPassword2) => {
+  const response = await fetch(`${ENDPOINT}/change-password/`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + String(token)
+    },
+    body: JSON.stringify({
+      old_password: oldPassword,
+      new_password: newPassword,
+      new_password2: newPassword2
+    })
+  })
+
+  const data = await response.json()
+  return data
+}

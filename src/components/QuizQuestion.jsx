@@ -71,13 +71,13 @@ export const QuizQuestion = () => {
   }, [userScore])
 
   return (
-    <div className='container d-flex justify-content-center'>
+    <>
       {completed === null &&
-        <div>
+        <div className='container'>
           <Countdown seconds={quizInfo.timeToComplete * 60} />
-          <div className='card border' style={{ maxWidth: '500px', minWidth: '500px' }} data-bs-theme='dark'>
+          <div className='card border ms-auto me-auto' style={{ maxWidth: '500px' }} data-bs-theme='dark'>
             <div className='card-header'>
-              <h2>Question {questionStage}: {questionTitle}</h2>
+              <h2>{questionTitle}</h2>
             </div>
             <ul className='list-group list-group-flush'>
               {choices.map((choice) => (
@@ -116,6 +116,6 @@ export const QuizQuestion = () => {
           </div>
 
         </div>}
-    </div>
+    </>
   )
 }

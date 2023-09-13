@@ -50,11 +50,11 @@ export const QuizFormPage = () => {
 
   return (
     <div className='container' style={{ maxWidth: '600px' }}>
-      <div className='card border p-4' data-bs-theme='dark'>
+      <div className='card border' data-bs-theme='dark'>
         {quizInfoSubmited === false ? <GeneralInfoQuizForm /> : <QuestionForm />}
         {questionsCount >= 3 &&
-          <div className='card-footer bg-dark mt-3 pt-4'>
-            <button className='btn btn-outline-success' onClick={handleQuizCreation}>Create quiz!</button>
+          <div className='card-footer mt-3 pt-4'>
+            <button className='btn btn-outline-success mb-3' onClick={handleQuizCreation}>Create quiz!</button>
           </div>}
       </div>
     </div>

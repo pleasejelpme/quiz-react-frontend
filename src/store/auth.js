@@ -23,3 +23,13 @@ export const useAuthStore = create(
     }
   )
 )
+
+export const useChangePasswordStore = create((set) => ({
+  oldPassword: '',
+  newPassword: '',
+  newPasswpord2: '',
+
+  setOldPassword: (psw) => set({ oldPassword: psw }),
+  setNewPassword: (psw) => set({ newPassword: psw }),
+  setNewPassword2: (psw) => set({ newPassword2: psw })
+}))

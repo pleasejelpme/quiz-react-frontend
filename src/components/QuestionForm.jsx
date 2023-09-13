@@ -59,54 +59,57 @@ export const QuestionForm = () => {
         <p>You must add a minimum of 3 questions</p>
       </div>
 
-      <form onSubmit={handleQuestionSubmit}>
-        <div className='mb-3'>
-          <label className='form-label' htmlFor='question'><h4>Question {questionsCount + 1}:</h4></label>
-          <input className='form-control' type='text' id='question' name='question' required />
-        </div>
-
-        <fieldset>
-          <legend>Choices</legend>
-
-          <div className='row mb-3 d-flex align-items-center'>
-            <div className='col-sm-10'>
-              <input className='form-control' type='text' name='answer1' required />
-            </div>
-            <div className='col-sm-2'>
-              <input className='form-check' type='radio' name='correctAnswer' value={0} required />
-            </div>
+      <div className='card-body'>
+        <form onSubmit={handleQuestionSubmit}>
+          <div className='mb-3'>
+            <label className='form-label' htmlFor='question'><h4>Question {questionsCount + 1}:</h4></label>
+            <input className='form-control' type='text' id='question' name='question' required />
           </div>
 
-          <div className='row mb-3 d-flex align-items-center'>
-            <div className='col-sm-10'>
-              <input className='form-control' type='text' name='answer2' required />
-            </div>
-            <div className='col-sm-2'>
-              <input className='form-check' type='radio' name='correctAnswer' value={1} required />
-            </div>
-          </div>
+          <fieldset>
+            <legend>Choices</legend>
 
-          <div className='row mb-3 d-flex align-items-center'>
-            <div className='col-sm-10'>
-              <input className='form-control' type='text' name='answer3' required />
+            <div className='row mb-3 d-flex align-items-center'>
+              <div className='col-sm-10'>
+                <input className='form-control' type='text' name='answer1' required />
+              </div>
+              <div className='col-sm-2 form-check'>
+                <input className='form-check-input' type='radio' name='correctAnswer' value={0} required />
+              </div>
             </div>
-            <div className='col-sm-2'>
-              <input className='form-check' type='radio' name='correctAnswer' value={2} required />
-            </div>
-          </div>
 
-          <div className='row mb-3 d-flex align-items-center'>
-            <div className='col-sm-10'>
-              <input className='form-control' type='text' name='answer4' required />
+            <div className='row mb-3 d-flex align-items-center'>
+              <div className='col-sm-10'>
+                <input className='form-control' type='text' name='answer2' required />
+              </div>
+              <div className='col-sm-2 form-check'>
+                <input className='form-check-input' type='radio' name='correctAnswer' value={1} required />
+              </div>
             </div>
-            <div className='col-sm-2'>
-              <input className='form-check' type='radio' name='correctAnswer' value={3} required />
-            </div>
-          </div>
-        </fieldset>
 
-        <button className='btn btn-outline-primary'>Add question</button>
-      </form>
+            <div className='row mb-3 d-flex align-items-center'>
+              <div className='col-sm-10'>
+                <input className='form-control' type='text' name='answer3' required />
+              </div>
+              <div className='col-sm-2 form-check'>
+                <input className='form-check-input' type='radio' name='correctAnswer' value={2} required />
+              </div>
+            </div>
+
+            <div className='row mb-3 d-flex align-items-center'>
+              <div className='col-sm-10'>
+                <input className='form-control' type='text' name='answer4' required />
+              </div>
+              <div className='col-sm-2 form-check'>
+                <input className='form-check-input' type='radio' name='correctAnswer' value={3} required />
+              </div>
+            </div>
+          </fieldset>
+
+          <button className='btn btn-outline-primary mt-3'>Add question</button>
+        </form>
+      </div>
+
     </>
   )
 }

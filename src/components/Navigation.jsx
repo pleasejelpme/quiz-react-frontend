@@ -18,18 +18,57 @@ export const Navigation = () => {
 
   function renderLoggedUser () {
     return (
-      <div className='d-flex justify-content-between'>
-        <div>
-          <ul className='navbar-nav'>
+      <>
+        <button
+          className='navbar-toggler'
+          type='button'
+          data-bs-toggle='collapse'
+          data-bs-target='#menu'
+          aria-controls='menu'
+          aria-expanded='false'
+          aria-label='Toggle navigation'
+        >
+          <span className='navbar-toggler-icon' />
+        </button>
+
+        <div className='collapse navbar-collapse' id='menu'>
+          <ul className='navbar-nav me-auto mb-3 mb-md-0'>
             <li className='nav-item'>
               <Link to='/add-quiz' className='nav-link'>Create quiz</Link>
             </li>
             <li className='nav-item'>
               <Link to='/completions' className='nav-link'>Completions</Link>
             </li>
+            <li className='nav-item dropdown'>
+              <a className='nav-link dropdown-toggle' href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
+                Account
+              </a>
+              <ul className='dropdown-menu'>
+                <li>
+                  <Link className='dropdown-item' to='/account'>Settings</Link>
+                </li>
+                <li>
+                  <a
+                    className='dropdown-item dropdown-item-hover'
+                    href=''
+                    onClick={logoutUser}
+                  >
+                    Logout
+                  </a>
+                </li>
+              </ul>
+            </li>
           </ul>
+          <form className='d-flex w-sm-25' role='search'>
+            <input
+              className='form-control me-2'
+              type='search'
+              placeholder='Search a quiz...'
+              onChange={e => handleSearch(e.target.value.toLowerCase())}
+            />
+          </form>
         </div>
-      </div>
+      </>
     )
   }
 
@@ -48,34 +87,15 @@ export const Navigation = () => {
 
   return (
     <div className='container mb-5'>
-      <nav className='navbar navbar-expand-lg mt-3 bg-dark border-bottom border-body' data-bs-theme='dark'>
-        <div className='container-fluid d-flex'>
-          <Link to='/' className='navbar-brand mb-0 h1'>QUIZ APP</Link>
-          <div className='collapse navbar-collapse'>
-            {username
-              ? renderLoggedUser()
-              : renderAnonUser()}
-          </div>
-          {username &&
-            <div>
-              <ul className='navbar-nav'>
-                <li className='navbar-item'>
-                  <form className='d-flex' role='search'>
-                    <input
-                      className='form-control me-2'
-                      type='search'
-                      placeholder='Search a quiz...'
-                      onChange={e => handleSearch(e.target.value.toLowerCase())}
-                    />
-                  </form>
-                </li>
-                <li className='navbar-item'>
-                  <button className='btn btn-outline-danger' onClick={logoutUser}>logout</button>
-                </li>
-              </ul>
+      <nav className='navbar navbar-expand-md mt-3 bg-dark border-bottom border-body' data-bs-theme='dark'>
+        <Link to='/' className='navbar-brand mb-0 h1'>
+          <i className='bi-book me-2 pt-5' style={{ fontSize: '1.5rem' }} />
+          <span>QUIZ APP</span>
+        </Link>
 
-            </div>}
-        </div>
+        {username
+          ? renderLoggedUser()
+          : renderAnonUser()}
       </nav>
     </div>
   )
