@@ -69,38 +69,38 @@ export const QuestionForm = () => {
           <fieldset>
             <legend>Choices</legend>
 
-            <div className='row mb-3 d-flex align-items-center'>
-              <div className='col-sm-10'>
+            <div className='row mb-3'>
+              <div className='col-10'>
                 <input className='form-control' type='text' name='answer1' required />
               </div>
-              <div className='col-sm-2 form-check'>
+              <div className='col d-flex align-items-center justify-content-center form-check'>
                 <input className='form-check-input' type='radio' name='correctAnswer' value={0} required />
               </div>
             </div>
 
-            <div className='row mb-3 d-flex align-items-center'>
-              <div className='col-sm-10'>
+            <div className='row mb-3'>
+              <div className='col-10'>
                 <input className='form-control' type='text' name='answer2' required />
               </div>
-              <div className='col-sm-2 form-check'>
+              <div className='col d-flex align-items-center justify-content-center form-check'>
                 <input className='form-check-input' type='radio' name='correctAnswer' value={1} required />
               </div>
             </div>
 
-            <div className='row mb-3 d-flex align-items-center'>
-              <div className='col-sm-10'>
+            <div className='row mb-3'>
+              <div className='col-10'>
                 <input className='form-control' type='text' name='answer3' required />
               </div>
-              <div className='col-sm-2 form-check'>
+              <div className='col d-flex align-items-center justify-content-center form-check'>
                 <input className='form-check-input' type='radio' name='correctAnswer' value={2} required />
               </div>
             </div>
 
-            <div className='row mb-3 d-flex align-items-center'>
-              <div className='col-sm-10'>
+            <div className='row mb-3'>
+              <div className='col-10'>
                 <input className='form-control' type='text' name='answer4' required />
               </div>
-              <div className='col-sm-2 form-check'>
+              <div className='col d-flex align-items-center justify-content-center form-check'>
                 <input className='form-check-input' type='radio' name='correctAnswer' value={3} required />
               </div>
             </div>

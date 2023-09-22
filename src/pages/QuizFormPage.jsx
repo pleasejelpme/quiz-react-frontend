@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
+import { motion } from 'framer-motion'
 
 import { useQuizStore } from '../store/quizes'
 import { useAuthStore } from '../store/auth'
@@ -49,7 +50,13 @@ export const QuizFormPage = () => {
   }
 
   return (
-    <div className='container' style={{ maxWidth: '600px' }}>
+    <motion.div
+      className='container'
+      style={{ maxWidth: '600px' }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1, ease: 'easeOut' }}
+    >
       <div className='card border' data-bs-theme='dark'>
         {quizInfoSubmited === false ? <GeneralInfoQuizForm /> : <QuestionForm />}
         {questionsCount >= 3 &&
@@ -57,6 +64,6 @@ export const QuizFormPage = () => {
             <button className='btn btn-outline-success mb-3' onClick={handleQuizCreation}>Create quiz!</button>
           </div>}
       </div>
-    </div>
+    </motion.div>
   )
 }

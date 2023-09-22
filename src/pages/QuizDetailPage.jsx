@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 import { getSpecificQuiz } from '../api/quizRequests'
 import { useAuthStore } from '../store/auth'
@@ -49,7 +50,12 @@ export const QuizDetailPage = () => {
   }
 
   return (
-    <div className='container d-flex justify-content-center'>
+    <motion.div
+      className='container d-flex justify-content-center'
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1, ease: 'easeOut' }}
+    >
       {questionStage === 0 &&
         <div className='card border' style={{ width: '30rem', height: 'auto' }} data-bs-theme='dark'>
           <div className='card-header text-white'>
@@ -69,6 +75,6 @@ export const QuizDetailPage = () => {
 
       {questionStage !== 0 &&
         <QuizQuestion />}
-    </div>
+    </motion.div>
   )
 }

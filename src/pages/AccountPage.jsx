@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { toast } from 'react-hot-toast'
+import { motion } from 'framer-motion'
 
 import { AccountInfo } from '../components/Accountinfo'
 import { ChangePasswordForm } from '../components/ChangePasswordForm'
@@ -27,7 +28,12 @@ export const AccountPage = () => {
   }
 
   return (
-    <div className='container'>
+    <motion.div
+      className='container'
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1, ease: 'easeOut' }}
+    >
       <div className='row'>
         <div className='col-sm-12 d-flex justify-content-center'>
           <div className='card border' data-bs-theme='dark' style={{ width: '500px' }}>
@@ -50,7 +56,7 @@ export const AccountPage = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
 
   )
 }

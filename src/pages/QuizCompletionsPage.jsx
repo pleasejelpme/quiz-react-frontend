@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
+
 import { useAuthStore } from '../store/auth'
 import { getCompletedQuizes } from '../api/quizRequests'
 
@@ -26,7 +28,7 @@ export const QuizCompletionsPage = () => {
           </tr>
         </thead>
 
-        <tbody className='table-group-divider'>
+        <tbody>
           {completedQuizes.map((completion) => (
             <tr key={completion.quiz_id}>
               <td><Link to={`../quizes/${completion.quiz_id}`}>{completion.quiz_title}</Link></td>
@@ -39,16 +41,21 @@ export const QuizCompletionsPage = () => {
   }
 
   return (
-    <div className='container'>
+    <motion.div
+      className='container'
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1, ease: 'easeOut' }}
+    >
       <div className='row d-flex justify-content-center'>
         <div className='col-md-6 col-sm-12'>
           <h2>Completed Quizes</h2>
-          <table className='table table-dark mt-5'>
+          <table className='table table-dark table-hover mt-5'>
             {renderCompletedQuizes(completedQuizes)}
           </table>
         </div>
 
       </div>
-    </div>
+    </motion.div>
   )
 }

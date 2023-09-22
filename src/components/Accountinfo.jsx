@@ -8,7 +8,9 @@ export const AccountInfo = () => {
       <div className='card-header'>
         <h2 className='card-title'>{user}</h2>
       </div>
-      <div className='card-body' />
+      <div className='card-body'>
+        <span style={{ fontSize: '30px' }}>🧠😎</span>
+      </div>
     </>
   )
 }

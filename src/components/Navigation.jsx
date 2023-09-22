@@ -45,11 +45,14 @@ export const Navigation = () => {
               </a>
               <ul className='dropdown-menu'>
                 <li>
+                  <span className='dropdown-item disabled text-primary'>{username} 🧠</span>
+                </li>
+                <li>
                   <Link className='dropdown-item' to='/account'>Settings</Link>
                 </li>
                 <li>
                   <a
-                    className='dropdown-item dropdown-item-hover'
+                    className='dropdown-item'
                     href=''
                     onClick={logoutUser}
                   >

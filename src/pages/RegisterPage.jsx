@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
+import { motion } from 'framer-motion'
 
 import { registerUser } from '../api/authRequests'
 import { useAuthStore } from '../store/auth'
@@ -36,7 +37,12 @@ export const RegisterPage = () => {
   }
 
   return (
-    <div className='container d-flex justify-content-center'>
+    <motion.div
+      className='container d-flex justify-content-center'
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1, ease: 'easeOut' }}
+    >
       <div className='card' data-bs-theme='dark' style={{ width: '500px' }}>
         <div className='card-header'>
           <h2 className='card-title'>Register</h2>
@@ -100,6 +106,6 @@ export const RegisterPage = () => {
         </div>
 
       </div>
-    </div>
+    </motion.div>
   )
 }

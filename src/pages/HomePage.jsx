@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 import { getQuizes } from '../api/quizRequests'
 import { useQuizCompletionStore, useQuizSearch } from '../store/quizes'
@@ -27,7 +28,12 @@ export const HomePage = () => {
   }, [])
 
   return (
-    <div className='container'>
+    <motion.div
+      className='container'
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1, ease: 'easeOut' }}
+    >
       <div className='row d-flex align-items-center'>
         {filteredQuizes
           ? filteredQuizes.map((quiz) => (
@@ -45,6 +51,6 @@ export const HomePage = () => {
           ))
           : <h2>No quizes found! 😭</h2>}
       </div>
-    </div>
+    </motion.div>
   )
 }

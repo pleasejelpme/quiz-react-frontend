@@ -63,20 +63,23 @@ export const GeneralInfoQuizForm = () => {
           </div>
 
           <div className='row d-flex justify-content-center mb-3'>
-            <div className='col-sm-3'>
+            <div className='mb-2'>
+              <span>Difficulty: </span>
+            </div>
+            <div className='col-sm-3 border' style={{ borderRadius: '7px' }}>
               <div className='form-check'>
                 <input className='form-check-input' type='radio' id='easy' name='difficulty' value='easy' style={{ cursor: 'pointer' }} required />
-                <label className='form-check-label' htmlFor='easy' style={{ cursor: 'pointer' }}>easy</label>
+                <label className='form-check-label' htmlFor='easy' style={{ cursor: 'pointer' }}>Easy</label>
               </div>
 
               <div className='form-check'>
                 <input className='form-check-input' type='radio' id='medium' name='difficulty' value='medium' style={{ cursor: 'pointer' }} required />
-                <label className='form-check-label' htmlFor='medium' style={{ cursor: 'pointer' }}>medium</label>
+                <label className='form-check-label' htmlFor='medium' style={{ cursor: 'pointer' }}>Medium</label>
               </div>
 
               <div className='form-check'>
                 <input className='form-check-input' type='radio' id='hard' name='difficulty' value='hard' style={{ cursor: 'pointer' }} required />
-                <label className='form-check-label' htmlFor='hard' style={{ cursor: 'pointer' }}>hard</label>
+                <label className='form-check-label' htmlFor='hard' style={{ cursor: 'pointer' }}>Hard</label>
               </div>
             </div>
 
