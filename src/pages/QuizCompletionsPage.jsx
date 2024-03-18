@@ -25,6 +25,7 @@ export const QuizCompletionsPage = () => {
           <tr>
             <th>Quiz</th>
             <th>Best score</th>
+            <th>Total completions</th>
           </tr>
         </thead>
 
@@ -33,6 +34,7 @@ export const QuizCompletionsPage = () => {
             <tr key={completion.quiz_id}>
               <td><Link to={`../quizes/${completion.quiz_id}`}>{completion.quiz_title}</Link></td>
               <td>{completion.best_score}</td>
+              <td>{completion.completions}</td>
             </tr>
           ))}
         </tbody>

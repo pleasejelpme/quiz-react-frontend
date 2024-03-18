@@ -22,12 +22,13 @@ function App () {
   const setRefreshToken = useAuthStore(state => state.setRefreshToken)
   const setAccessToken = useAuthStore(state => state.setAccessToken)
 
-  // refresh jwt every 5 minutes
+  // refresh jwt every 10 minutes
   useEffect(() => {
-    const timeInterval = 1000 * 60 * 5
+    const timeInterval = 1000 * 60
     const interval = setInterval(async () => {
       if (refreshToken) {
         const newTokens = await refreshAuthTokens(refreshToken)
+        console.log('token updated: ', newTokens.access)
         setAccessToken(newTokens.access)
         setRefreshToken(newTokens.refresh)
       }
@@ -71,12 +72,13 @@ function App () {
 
           {/* PROTECTED ROUTES */}
           <Route element={<PrivateRoutes />}>
-            <Route path='/quizes/:quizId' element={<QuizDetailPage />} />
             <Route path='/add-quiz' element={<QuizFormPage />} />
-            <Route path='/' element={<HomePage />} />
             <Route path='/completions' element={<QuizCompletionsPage />} />
             <Route path='/account' element={<AccountPage />} />
           </Route>
+
+          <Route path='/' element={<HomePage />} />
+          <Route path='/quizes/:quizId' element={<QuizDetailPage />} />
         </Routes>
       </AnimatePresence>
 

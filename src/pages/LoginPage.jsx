@@ -10,6 +10,7 @@ import { loginUser } from '../api/authRequests'
 
 export const LoginPage = () => {
   const setLoggedUser = useAuthStore(state => state.setLoggedUser)
+  const setUserEmail = useAuthStore(state => state.setUserEmail)
   const setAccessToken = useAuthStore(state => state.setAccessToken)
   const setRefreshToken = useAuthStore(state => state.setRefreshToken)
 
@@ -25,6 +26,7 @@ export const LoginPage = () => {
         setAccessToken(userTokens.access)
         setRefreshToken(userTokens.refresh)
         setLoggedUser(jwtDecode(userTokens.access).username)
+        setUserEmail(jwtDecode(userTokens.access).email)
 
         setUsername('')
         setPassword('')

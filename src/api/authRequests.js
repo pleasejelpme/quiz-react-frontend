@@ -62,5 +62,23 @@ export const changePassword = async (token, oldPassword, newPassword, newPasswor
   })
 
   const data = await response.json()
+  console.log('status: ', data)
+  return data
+}
+
+export const setEmail = async (token, password, email, requestMethod) => {
+  const response = await fetch(`${ENDPOINT}/set-email/`, {
+    method: requestMethod,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + String(token)
+    },
+    body: JSON.stringify({
+      email,
+      password
+    })
+  })
+
+  const data = await response.json()
   return data
 }

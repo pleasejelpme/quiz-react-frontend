@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 
 import { getQuizes } from '../api/quizRequests'
 import { useQuizCompletionStore, useQuizSearch } from '../store/quizes'
+import { QuizInfoBadge } from '../components/QuizInfoBadge'
 
 export const HomePage = () => {
   const [quizes, setQuizes] = useState([])
@@ -14,6 +15,12 @@ export const HomePage = () => {
     if (!queryset) return quizes
     const filtered = quizes.filter(quiz => quiz.title.toLowerCase().includes(queryset))
     return filtered.length > 0 ? filtered : null
+  }
+
+  const quizDifficultyColor = (difficulty) => {
+    if (difficulty === 'easy') return 'drop-shadow(0 0 0.2rem #07a316)'
+    if (difficulty === 'medium') return 'drop-shadow(0 0 0.2rem #0d6efd)'
+    if (difficulty === 'hard') return 'drop-shadow(0 0 0.2rem #c90e0e)'
   }
 
   const filteredQuizes = getFilteredQuizes(queryset, quizes)
@@ -42,9 +49,20 @@ export const HomePage = () => {
                 <div
                   className='card quiz-cards card-hover border d-flex justify-content-center aling-items-center'
                   data-bs-theme='dark'
-                  style={{ width: '20rem', height: '15rem', cursor: 'pointer' }}
+                  style={{
+                    width: '20rem',
+                    height: '15rem',
+                    cursor: 'pointer',
+                    filter: quizDifficultyColor(quiz.difficulty)
+                  }}
                 >
-                  <h2 className='text-primary'>{quiz.title}</h2>
+                  <div className='card-text'>
+                    <h2 className='text-light'>{quiz.title}</h2>
+                    <QuizInfoBadge difficulty={quiz.difficulty} />
+                    <small>
+                      <span className='badge rounded-pill bg-secondary ms-1'><i className='bi bi-stopwatch me-1' />{quiz.time_to_complete} minutes</span>
+                    </small>
+                  </div>
                 </div>
               </Link>
             </div>

@@ -14,6 +14,18 @@ export const getSpecificQuiz = async (id) => {
   return data
 }
 
+export const deleteQuiz = async (id, token) => {
+  const response = await fetch(`${ENDPOINT}/quizes/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + String(token)
+    }
+  })
+  const data = await response.json()
+  return data
+}
+
 export const createQuiz = async (token, quizInfo) => {
   const response = await fetch(`${ENDPOINT}/quizes/`, {
     method: 'POST',
