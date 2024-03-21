@@ -1,12 +1,12 @@
 /* eslint-disable no-undef */
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
-import { motion } from 'framer-motion'
 import jwtDecode from 'jwt-decode'
+import { Link } from 'react-router-dom'
 
 import { useAuthStore } from '../store/auth'
 import { loginUser } from '../api/authRequests'
+import { AuthenticationForm } from '../components/AuthenticationForm'
 
 export const LoginPage = () => {
   const setLoggedUser = useAuthStore(state => state.setLoggedUser)
@@ -40,62 +40,47 @@ export const LoginPage = () => {
 
     login()
   }
+
   return (
-    <motion.div
-      className='container d-flex justify-content-center'
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1, ease: 'easeOut' }}
-    >
-      <div className='card' data-bs-theme='dark' style={{ width: '500px' }}>
-        <div className='card-header'>
-          <h2 className='card-title'>Login</h2>
+    <AuthenticationForm cardTitle='Login' footerText='Dont have an account?' linkTo='register'>
+      <form onSubmit={handleLogin}>
+
+        <div>
+          <div className='input-group mb-3'>
+            <span className='input-group-text'>
+              <i className='bi-person-circle' style={{ fontSize: '1.1rem' }} />
+            </span>
+            <input
+              className='form-control'
+              placeholder='Username'
+              type='text'
+              id='username'
+              name='Username'
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className='input-group mb-1'>
+            <span className='input-group-text'>
+              <i className='bi-key' style={{ fontSize: '1.1rem' }} />
+            </span>
+            <input
+              className='form-control'
+              placeholder='Password'
+              type='password'
+              id='password'
+              name='Password'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <small><Link to='/password-recover' className='text-secondary-emphasis text-decoration-underline'>forgot your password?</Link></small>
         </div>
-
-        <div className='card-body'>
-          <form onSubmit={handleLogin}>
-
-            <div className='input-group mb-3'>
-              <span className='input-group-text'>
-                <i className='bi-person-circle' style={{ fontSize: '1.1rem' }} />
-              </span>
-              <input
-                className='form-control'
-                placeholder='Username'
-                type='text'
-                id='username'
-                name='Username'
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-              />
-            </div>
-
-            <div className='input-group mb-3'>
-              <span className='input-group-text'>
-                <i className='bi-key' style={{ fontSize: '1.1rem' }} />
-              </span>
-              <input
-                className='form-control'
-                placeholder='Password'
-                type='password'
-                id='password'
-                name='Password'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </div>
-
-            <button className='btn btn-outline-primary'>Login</button>
-          </form>
-        </div>
-
-        <div className='card-footer'>
-          <span>Dont have an account? <Link to='/register' className='text-primary'>register</Link></span>
-        </div>
-      </div>
-    </motion.div>
-
+        <button className='btn btn-outline-primary mt-2'>Login</button>
+      </form>
+    </AuthenticationForm>
   )
 }

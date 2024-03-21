@@ -5,13 +5,9 @@ import { ChangePasswordForm } from '../components/ChangePasswordForm'
 import { SetEmailForm } from '../components/SetEmailForm'
 import { AccountSettingsFooter } from '../components/AccountSettingsFooter'
 import { useAccountStore } from '../store/account'
-import { useEffect } from 'react'
 
 export const AccountPage = () => {
   const accountOption = useAccountStore(state => state.option)
-  useEffect(() => {
-    console.log(accountOption)
-  }, [])
 
   return (
     <motion.div

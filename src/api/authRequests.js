@@ -82,3 +82,32 @@ export const setEmail = async (token, password, email, requestMethod) => {
   const data = await response.json()
   return data
 }
+
+export const recoverPasswordToken = async (email) => {
+  const response = await fetch(`${ENDPOINT}/recover-password/`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ email })
+  })
+
+  const data = await response.json()
+  return data
+}
+
+export const resetPasswordWithToken = async (password, token) => {
+  const response = await fetch(`${ENDPOINT}/recover-password/confirm/`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      password,
+      token
+    })
+  })
+
+  const data = await response.json()
+  return data
+}

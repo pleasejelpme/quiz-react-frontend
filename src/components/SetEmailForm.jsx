@@ -1,7 +1,7 @@
 import { useAuthStore } from '../store/auth'
 import { useAccountStore } from '../store/account'
 import { setEmail } from '../api/authRequests'
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { toast } from 'react-hot-toast'
 
 export const SetEmailForm = () => {
@@ -12,10 +12,6 @@ export const SetEmailForm = () => {
   const setUserEmail = useAuthStore(state => state.setUserEmail)
   const clearOption = useAccountStore(state => state.clearOption)
 
-  useEffect(() => {
-    console.log(userEmail)
-  }, [])
-
   const handleSetEmail = (e) => {
     e.preventDefault()
     if (userEmail === newEmail.current.value) {
@@ -25,7 +21,6 @@ export const SetEmailForm = () => {
 
     async function setEmailRequest (method) {
       const response = await setEmail(token, password.current.value, newEmail.current.value, method)
-      console.log(response)
       if (response.success) {
         toast.success('Email updated successfully!', { icon: '✅' })
         setUserEmail(response.email)

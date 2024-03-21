@@ -53,10 +53,7 @@ export const QuizDetailPage = () => {
   }, [])
 
   useEffect(() => {
-    console.log('useEffect triggered')
-    console.log(deleteQuizModal)
     if (deleteQuizModal) {
-      console.log(deleteQuizModal)
       deleteQuiz(quiz.id, userToken)
       toast.success('quest deleted successfully!', { icon: '✅' })
       navigate('/')

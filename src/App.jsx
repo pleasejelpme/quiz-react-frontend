@@ -5,6 +5,8 @@ import { AnimatePresence } from 'framer-motion'
 
 import { LoginPage } from './pages/LoginPage'
 import { RegisterPage } from './pages/RegisterPage'
+import { RecoverPasswordPage } from './pages/RecoverPasswordPage'
+import { NewPasswordWithCodePage } from './pages/NewPasswordWithCodePage'
 import { QuizFormPage } from './pages/QuizFormPage'
 import { QuizDetailPage } from './pages/QuizDetailPage'
 import { HomePage } from './pages/HomePage'
@@ -28,7 +30,6 @@ function App () {
     const interval = setInterval(async () => {
       if (refreshToken) {
         const newTokens = await refreshAuthTokens(refreshToken)
-        console.log('token updated: ', newTokens.access)
         setAccessToken(newTokens.access)
         setRefreshToken(newTokens.refresh)
       }
@@ -68,6 +69,8 @@ function App () {
           <Route element={<LoginRegisterRoutes />}>
             <Route path='/login' element={<LoginPage />} />
             <Route path='/register' element={<RegisterPage />} />
+            <Route path='/password-recover' element={<RecoverPasswordPage />} />
+            <Route path='/new-password' element={<NewPasswordWithCodePage />} />
           </Route>
 
           {/* PROTECTED ROUTES */}
