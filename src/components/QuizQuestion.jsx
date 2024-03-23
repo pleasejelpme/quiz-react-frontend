@@ -83,7 +83,7 @@ export const QuizQuestion = () => {
               {choices.map((choice) => (
                 <li
                   className='list-group-item list-group-item-action'
-                  key={choice.id}
+                  key={choice.answer}
                   onClick={handleClickUserChoice(choice.correct)}
                   style={{ cursor: 'pointer' }}
                 >

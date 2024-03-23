@@ -6,7 +6,7 @@ import { useQuizStore } from '../store/quizes'
 import { useAuthStore } from '../store/auth'
 import { GeneralInfoQuizForm } from '../components/GeneralInfoQuizForm'
 import { QuestionForm } from '../components/QuestionForm'
-import { createQuiz, addQuestionToQuiz, addAnswerToQuiz } from '../api/quizRequests'
+import { createQuiz } from '../api/quizRequests'
 
 export const QuizFormPage = () => {
   const quizInfoSubmited = useQuizStore(state => state.quizInfoSubmited)
@@ -22,27 +22,16 @@ export const QuizFormPage = () => {
   const handleQuizCreation = async () => {
     // fetch all the data to the API
     try {
-      const [quizCreated, response] = await createQuiz(token, quizInfo)
+      const response = await createQuiz(token, quizInfo, questions)
       if (response.status === 201) {
-        for (const question of questions) {
-          const questionTitle = question.question
-          const choices = question.choices
-          const [questionCreated, response] = await addQuestionToQuiz(token, quizCreated.id, questionTitle)
-          if (response.status === 201) {
-            for (const choice of choices) {
-              const choiceText = choice.text
-              const isCorrect = choice.correct
-              await addAnswerToQuiz(token, questionCreated.id, choiceText, isCorrect)
-            }
-          }
-        }
+        resetQuiz()
+        toast.success('Quiz created successfully!', { icon: '✅' })
+        navigate('/')
       }
       // restart all the quiz states
-      resetQuiz()
-      toast.success('Quiz created successfully!')
-      navigate('/')
     } catch {
-      console.log('something went wrong')
+      toast.error('Something went wrong...')
+      resetQuiz()
     } finally {
       // restart all the quiz states
       resetQuiz()

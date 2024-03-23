@@ -35,17 +35,17 @@ export const QuestionForm = () => {
     }
 
     const answersList = [
-      { text: answer1, correct: false },
-      { text: answer2, correct: false },
-      { text: answer3, correct: false },
-      { text: answer4, correct: false }
+      { answer: answer1, correct: false },
+      { answer: answer2, correct: false },
+      { answer: answer3, correct: false },
+      { answer: answer4, correct: false }
     ]
 
     answersList[correctOption].correct = true
 
     setQuestionsTitles([...questionsTitles, questionTitle])
 
-    const newQuestion = { question: questionTitle, choices: answersList }
+    const newQuestion = { question: questionTitle, answers: answersList }
     setQuestions([...questionsToFetch, newQuestion])
     incrementQuestionsCount()
     e.target.reset()

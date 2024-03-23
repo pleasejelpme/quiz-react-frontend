@@ -26,7 +26,7 @@ export const deleteQuiz = async (id, token) => {
   return data
 }
 
-export const createQuiz = async (token, quizInfo) => {
+export const createQuiz = async (token, quizInfo, questions) => {
   const response = await fetch(`${ENDPOINT}/quizes/`, {
     method: 'POST',
     headers: {
@@ -38,43 +38,12 @@ export const createQuiz = async (token, quizInfo) => {
       'topic': quizInfo.topic,
       'time_to_complete': quizInfo.timeToComplete,
       'required_score': quizInfo.requiredScore,
-      'difficulty': quizInfo.difficulty
+      'difficulty': quizInfo.difficulty,
+      'questions': questions
     })
   })
 
-  const data = await response.json()
-  return [data, response]
-}
-
-export const addQuestionToQuiz = async (token, quizId, question) => {
-  const response = await fetch(`${ENDPOINT}/questions/`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + String(token)
-    },
-    body: JSON.stringify({
-      'quiz': quizId,
-      question
-    })
-  })
-  const data = await response.json()
-  return [data, response]
-}
-
-export const addAnswerToQuiz = async (token, questionId, choice, isCorrect) => {
-  await fetch(`${ENDPOINT}/answers/`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + String(token)
-    },
-    body: JSON.stringify({
-      'question': questionId,
-      'answer': choice,
-      'correct': isCorrect
-    })
-  })
+  return response
 }
 
 export const addCompletedQuiz = async (token, quizId, score) => {
@@ -90,8 +59,7 @@ export const addCompletedQuiz = async (token, quizId, score) => {
     })
   })
 
-  const data = await response.json()
-  return data
+  return response
 }
 
 export const getCompletedQuizes = async (token) => {

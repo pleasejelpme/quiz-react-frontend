@@ -1,14 +1,15 @@
 html {
-    overflow-y: hidden;
+    width: 100%;
 }
 
 body {
     font-family: system-ui;
-    overflow: auto;
+    width: 100%;
+    overflow-y: scroll;
 }
 
 body .modal-open {
-    overflow: auto;
+    overflow: scroll;
 }
 
 input[type=number]::-webkit-inner-spin-button,
